@@ -1,0 +1,5 @@
+# Ignore the google-api directory
+google-api/
+
+# Ignore the omise-php directory
+omise-php/

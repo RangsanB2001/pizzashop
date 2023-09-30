@@ -1,0 +1,60 @@
+/* เพิ่มสีพื้นหลังให้กับ header */
+header {
+  background-color: #343a40; /* สีเทาเข้ม */
+  color: #ffc107; /* สีเหลือง */
+  padding: 20px;
+}
+
+/* ปรับขนาดและขอบรอบของโลโก้ */
+.navbar-brand {
+  font-size: 24px;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+/* ปรับสีของ badge */
+.badge {
+  background-color: #f8f9fa; /* สีเทาอ่อน */
+  color: #343a40; /* สีเทาเข้ม */
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 50%;
+}
+
+/* ปรับสีของ button "Sign in" */
+.btn-outline-warning {
+  color: #ffc107; /* สีเหลือง */
+  border-color: #ffc107; /* สีเหลือง */
+}
+
+/* เพิ่มสีพื้นหลังให้กับ section "List Menu" */
+section {
+  background-color: #f8f9fa; /* สีเทาอ่อน */
+  padding: 30px 0;
+}
+
+/* ปรับขนาดรูปในการแสดงรายการเมนู */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* ปรับขนาดและขอบรอบของการ์ด */
+.card {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* ปรับสีของข้อความราคา */
+.card-footer {
+  background-color: #343a40; /* สีเทาเข้ม */
+  color: #ffc107; /* สีเหลือง */
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+@media (min-width: 1025px) {
+  .h-custom {
+    height: 100vh !important;
+  }
+}
