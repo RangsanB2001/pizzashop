@@ -1,60 +1,110 @@
-/* เพิ่มสีพื้นหลังให้กับ header */
-header {
-  background-color: #343a40; /* สีเทาเข้ม */
-  color: #ffc107; /* สีเหลือง */
+/* Global Styles */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Lato", Arial, sans-serif;
+  background-color: #f0f0f0; /* Light gray background */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
-/* ปรับขนาดและขอบรอบของโลโก้ */
+/* Header Styles */
+header {
+  background-color: #343a40; /* Dark gray background */
+  color: #ffc107; /* Yellow text color */
+  padding: 10px;
+}
+
 .navbar-brand {
   font-size: 24px;
-  border-radius: 5px;
-  padding: 10px 20px;
+  font-weight: bold;
+  padding: 10px 10px;
+  color: #ffc107; /* Yellow text color */
+  text-decoration: none;
 }
 
-/* ปรับสีของ badge */
-.badge {
-  background-color: #f8f9fa; /* สีเทาอ่อน */
-  color: #343a40; /* สีเทาเข้ม */
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 50%;
-}
-
-/* ปรับสีของ button "Sign in" */
-.btn-outline-warning {
-  color: #ffc107; /* สีเหลือง */
-  border-color: #ffc107; /* สีเหลือง */
-}
-
-/* เพิ่มสีพื้นหลังให้กับ section "List Menu" */
+/* Section Styles */
 section {
-  background-color: #f8f9fa; /* สีเทาอ่อน */
+  background-color: #f8f9fa; /* Light gray background */
   padding: 30px 0;
 }
 
-/* ปรับขนาดรูปในการแสดงรายการเมนู */
+/* Card Styles */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* White background */
+  margin-bottom: 20px;
+}
+
 .card-img-top {
   height: 200px;
   object-fit: cover;
 }
 
-/* ปรับขนาดและขอบรอบของการ์ด */
-.card {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* ปรับสีของข้อความราคา */
 .card-footer {
-  background-color: #343a40; /* สีเทาเข้ม */
-  color: #ffc107; /* สีเหลือง */
+  background-color: #343a40; /* Dark gray background */
+  color: #ffc107; /* Yellow text color */
   padding: 10px;
   border-radius: 0 0 10px 10px;
 }
 
-@media (min-width: 1025px) {
-  .h-custom {
-    height: 100vh !important;
-  }
+
+/* Style for the cart link */
+#cart {
+  text-decoration: none;
+  color: #ffffff; /* Text color */
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the cart icon */
+.bi-basket {
+  font-size: 24px; /* Adjust the icon size */
+  margin-right: 5px; /* Spacing between icon and text */
+}
+
+/* Style for the badge */
+.badge {
+  background-color: #ffc107; /* Badge background color */
+  color: #333; /* Badge text color */
+  font-size: 14px; /* Badge font size */
+  padding: 5px 10px; /* Badge padding */
+  border-radius: 50%; /* Make it circular */
+  margin-right: 3px;
+}
+
+/* Hover effect for the cart link */
+#cart:hover {
+  color: #ffc107; /* Change text color on hover */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Style for pizza options */
+.pizza-option {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pizza-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.pizza-option label {
+  display: block;
+  cursor: pointer;
 }

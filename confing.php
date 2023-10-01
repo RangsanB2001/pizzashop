@@ -1,4 +1,6 @@
 <?php
+$base_url ='http://localhost/PizzaShop';
+
 session_start();
 // change the information according to your database
 // $db_connection = mysqli_connect("sql313.byethost4.com", "b4_35023426", "rangsan2234", "b4_35023426_google_login");
