@@ -1,11 +1,14 @@
-<?php require 'haeder.php' ?>
+<?php require 'haeder.php'; 
+$sql = "SELECT * FROM pizza";
+$result = $db_connection->query($sql);
+?>
 <!--Main Navigation-->
 <header>
     <!-- Navbar -->
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="images/image_6.jpg" class="d-inline" alt="..." width="1500px" height="500px">
+                <img src="images/Baner_1.jpg" class="d-inline" alt="..." width="1500px" height="500px">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>PangKungPizza</h5>
                     <p>Welcome to welcome customers to Pang Kung Pizza.</p>
@@ -36,36 +39,28 @@
 </section>
 <div class="container text-center mt-3">
     <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2">
+        <?php 
+            if ($result->num_rows > 0) {
+                $i = 1;
+                while ($row = $result->fetch_assoc()) {
+                    ?>
         <div class="col-md-6">
             <div class="p-2">
                 <div class="card">
-                    <a class="text-decoration-none" href="details.php">
-                        <img src="images/pizza-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">พิซซ่าหน้าฮาวายเอียน</p>
-                        </div>
+                    <a class="text-decoration-none" href="details.php?id=<?= $row['piza_id'] ?>">
+                        <img src="images/<?= $row['piz_image'] ?>" class="card-img-top md-2" alt="...">
                         <div class="card-footer">
-                            <p>ราคา</p>
+                            <p class="card-text"><?= $row['piz_name'] ?></p>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="p-2">
-                <div class="card">
-                    <a class="text-decoration-none" href="details.php">
-                        <img src="images/pizza-1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">พิซซ่าหน้าฮาวายเอียน</p>
-                        </div>
-                        <div class="card-footer">
-                            <p>ราคา</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php
+                    $i++;
+                }
+            } ?>
+
     </div>
 </div>
 <?php
@@ -120,8 +115,7 @@ if (isset($_GET['code'])):
     }
     ;
 else:
-    // Google Login Url = $client->createAuthUrl();
-    ?>
+?>
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -142,6 +136,5 @@ else:
         </div>
     </div>
 </div>
-
 <?php endif; ?>
 <?php require 'footer.php' ?>

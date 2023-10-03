@@ -5,7 +5,7 @@
             <h1 class="text-capitalize text-center">เพิ่มรายการพิซซ่า</h1>
         </section>
         <div class="col-md-8 col-sm-12">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="processAddProduct.php" method="post" enctype="multipart/form-data">
                 <div class="row g-3 mb-3">
                     <div class="col-sm-12">
                         <label for="form-label">รูปภาพพิซซ่า</label>

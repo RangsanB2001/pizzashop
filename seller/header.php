@@ -1,7 +1,10 @@
 <?php 
-require '../confing.php';
+require 'config.php';
+session_start();
+if (!isset($_SESSION["userid"])) {
+    header("Location: login.php");
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +19,7 @@ require '../confing.php';
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <title>เพิ่มรายการพิซซ่า</title>
 </head>
 
@@ -33,7 +36,7 @@ require '../confing.php';
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-warning" aria-current="page" href="#">จัดการพิซซ่า</a>
+                        <a class="nav-link active text-warning" aria-current="page" href="showproduct.php">จัดการพิซซ่า</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-warning" href="#">จัดการออเดอร์</a>
@@ -46,13 +49,13 @@ require '../confing.php';
                     <div class="dropdown">
                         <a class="btn btn-outline-warning dropdown-toggle text-white" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
+                            <?=$_SESSION['username']?>
                         </a>
 
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="logout.php">logout</a></li>
                         </ul>
                     </div>
                 </span>
