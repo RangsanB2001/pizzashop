@@ -12,23 +12,17 @@ body {
   background-color: #f0f0f0; /* Light gray background */
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 /* Header Styles */
 header {
   background-color: #343a40; /* Dark gray background */
   color: #ffc107; /* Yellow text color */
-  padding: 10px;
+  padding: 20px;
 }
 
 .navbar-brand {
   font-size: 24px;
   font-weight: bold;
-  padding: 10px 10px;
+  padding: 5px 5px;
   color: #ffc107; /* Yellow text color */
   text-decoration: none;
 }

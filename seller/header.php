@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'config.php';
 session_start();
 if (!isset($_SESSION["userid"])) {
@@ -15,11 +15,14 @@ if (!isset($_SESSION["userid"])) {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="../js/datatables.min.css" rel="stylesheet">
     <title>เพิ่มรายการพิซซ่า</title>
 </head>
 
@@ -27,7 +30,7 @@ if (!isset($_SESSION["userid"])) {
     <header class="navbar navbar-expand-lg bg-dark ">
         <div class="container text-warning">
             <a class="navbar-brand fs-3 fw-700 text-warning fw-bold"
-                href="<?=$base_url?>/seller/index.php">PungKungPizza</a>
+                href="<?= $base_url ?>/seller/index.php">PungKungPizza</a>
             <button class="navbar-toggler text-warning bg-light" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -36,25 +39,24 @@ if (!isset($_SESSION["userid"])) {
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-warning" aria-current="page" href="showproduct.php">จัดการพิซซ่า</a>
+                        <a class="nav-link active text-warning" aria-current="page"
+                            href="showproduct.php">จัดการพิซซ่า</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-warning" href="#">จัดการออเดอร์</a>
+                        <a class="nav-link text-warning" href="order.php">จัดการออเดอร์</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link text-warning" href="#">ตรวจการชำเงิน</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <span class="navbar-text text-warning">
                     <div class="dropdown">
                         <a class="btn btn-outline-warning dropdown-toggle text-white" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <?=$_SESSION['username']?>
+                            <?= $_SESSION['username'] ?>
                         </a>
 
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="logout.php">logout</a></li>
                         </ul>
                     </div>
