@@ -5,8 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         require_once dirname(__FILE__) . '../omise-php/lib/Omise.php';
         define('OMISE_API_VERSION', '2019-05-29');
-        define('OMISE_PUBLIC_KEY', 'pkey_test_5vypcwpstt2o4dnch50');
-        define('OMISE_SECRET_KEY', 'skey_test_5vypcwr4qer9czlf812');
+        define('OMISE_PUBLIC_KEY', 'ใส่ key_public_omise');
+        define('OMISE_SECRET_KEY', 'ใส่ key_secert_omise');
 
 
         $omiseToken = $_POST['omiseToken'];
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $customerData = $result->fetch_all(MYSQLI_ASSOC);
 
                 // Send an order notification to LINE
-                $lineToken = "gbnzWkIrElCps5SQiSCEOtGEph7u04AogADCUOoCt50"; // Replace with your LINE Notify token
+                $lineToken = "ใส่ TOKEN LINE_NOTIfy"; // Replace with your LINE Notify token
                 $message = "PangKungPizza New order\n";
                 $message .= "เลขที่ออเดอร์: " . $customerData[0]['orderref'] . "\n";
                 $message .= "อีเมลผู้ซื้อ: " . $customerData[0]['email'] . "\n";

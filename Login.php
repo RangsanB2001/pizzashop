@@ -6,7 +6,7 @@ $client = new Google_Client();
 $client->setClientId($clientID);
 $client->setClientSecret($clientSecret);
 
-$client->setRedirectUri('http://localhost/PizzaShop/Login.php');
+$client->setRedirectUri('http://localhost/ใส่ชื่อเว็ป/Login.php');
 
 $client->addScope("email");
 $client->addScope("profile");
