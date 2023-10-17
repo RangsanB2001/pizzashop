@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<pre>";
         if ($charge['status'] === "successful") {
             $db_connection->begin_transaction();
-            $user_id = $_SESSION['login_id'];
+            $user_id = $_SESSION['gg_id'];
             $status_order = 'ชำระเงินแล้ว';
 
             // Assuming you retrieve the order_id, address, and phone from the form
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Update the user table
             $sql = "UPDATE `user` SET `address` = ?, `phone` = ? WHERE gg_id = ?";
             $stmt = $db_connection->prepare($sql);
-            $stmt->bind_param("ssi", $address, $phone, $user_id);
+            $stmt->bind_param("sss", $address, $phone, $user_id);
             $stmt->execute();
 
             // Select data from multiple tables
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             JOIN `order_items` ON `order`.`order_id` = `order_items`.`order_id` 
             WHERE `order`.`user_id` = ? AND `order_items`.`order_id`= ?";
             $stmt = $db_connection->prepare($sql);
-            $stmt->bind_param("ii", $user_id, $order_id);
+            $stmt->bind_param("si", $user_id, $order_id);
             $stmt->execute();
             $result = $stmt->get_result();
 

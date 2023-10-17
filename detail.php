@@ -1,16 +1,16 @@
 <?php
-ob_start(); 
+ob_start();
 require 'haeder.php';
 
 // ตรวจสอบว่ามีการรับพารามิเตอร์ id จาก URL หรือไม่
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $pid = $_GET['id'];
     // คิวรี่ฐานข้อมูลเพื่อดึงข้อมูลสินค้าที่มี id ที่ตรงกับที่รับมาจาก URL
     $sql = "SELECT * FROM pizza
 JOIN detail ON detail.pizza_id = pizza.piza_id
 JOIN size ON detail.sid = size.size_id
 JOIN pizzadough ON detail.pd_id = pizzadough.pizdough_id
-WHERE pizza.piza_id = $id";
+WHERE pizza.piza_id = $pid";
     $result = $db_connection->query($sql);
     // ตรวจสอบว่ามีข้อมูลสินค้าหรือไม่
     if ($result->num_rows > 0) {
@@ -30,7 +30,7 @@ WHERE pizza.piza_id = $id";
 // add to cart
 if (isset($_POST['add_to_cart'])) {
     // รับข้อมูลจากฟอร์ม
-    $user_id =  $_SESSION['login_id'];
+    $uid = $_SESSION['gg_id']; 
     $pizza_id = $_POST['pizza-id'];
     $pizza_name = $_POST['pizza-type'];
     $pizza_crust = $_POST['pizza-crust'];
@@ -40,7 +40,7 @@ if (isset($_POST['add_to_cart'])) {
     // Check if the record already exists in the cart table
     $check_sql = "SELECT * FROM cart WHERE piz_id = ? AND s_id = ? AND pd_id = ?";
     $check_stmt = $db_connection->prepare($check_sql);
-    $check_stmt->bind_param("iii",$pizza_id,$pizza_size,$pizza_crust);
+    $check_stmt->bind_param("iii", $pid, $pizza_size, $pizza_crust);
     $check_stmt->execute();
     $check_result = $check_stmt->get_result();
 
@@ -48,7 +48,7 @@ if (isset($_POST['add_to_cart'])) {
         // The record already exists, so update the amount
         $update_sql = "UPDATE cart SET amount = amount + ? WHERE piz_id = ? AND s_id = ? AND pd_id = ? AND cart.user_id = ?";
         $update_stmt = $db_connection->prepare($update_sql);
-        $update_stmt->bind_param("iiiii", $quantity,$pizza_id,$pizza_size,$pizza_crust,$user_id);
+        $update_stmt->bind_param("iiiis", $quantity, $pizza_id, $pizza_size, $pizza_crust,$uid);
 
         if ($update_stmt->execute()) {
             header("Location: detail.php?id=" . $pizza_id);
@@ -59,7 +59,7 @@ if (isset($_POST['add_to_cart'])) {
         // The record doesn't exist, so insert a new one
         $insert_sql = "INSERT INTO `cart` (`user_id`,`piz_id`, `s_id`, `pd_id`, `amount`) VALUES (?,?,?,?,?)";
         $insert_stmt = $db_connection->prepare($insert_sql);
-        $insert_stmt->bind_param("iiiii",$user_id, $pizza_id,$pizza_size,$pizza_crust,$quantity);
+        $insert_stmt->bind_param("siiii",$uid, $pizza_id, $pizza_size, $pizza_crust, $quantity);
 
         if ($insert_stmt->execute()) {
             header("Location: detail.php?id=" . $pizza_id);
@@ -93,7 +93,7 @@ if (isset($_POST['add_to_cart'])) {
                         <!-- Add hidden input for base price -->
                         <input type="hidden" name="base-price" id="base-price" class="form-check-input"
                             value="<?= $price ?>" checked>
-                        <input type="hidden" name="pizza-id" id="pizza-id" value="<?= $id ?>" class="form-check-input"
+                        <input type="hidden" name="pizza-id" id="pizza-id" value="<?= $pid ?>" class="form-check-input"
                             checked>
                     </p>
                 </div>
@@ -103,7 +103,7 @@ if (isset($_POST['add_to_cart'])) {
                 <div class="mb-3">
                     <label for="pizza-crust" class="form-label">เลือกขนาด:</label>
                     <?php
-                    $sql = "SELECT DISTINCT * FROM size JOIN detail ON detail.sid = size.size_id WHERE detail.pizza_id = $id";
+                    $sql = "SELECT DISTINCT * FROM size JOIN detail ON detail.sid = size.size_id WHERE detail.pizza_id = $pid";
                     $result = $db_connection->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -129,7 +129,7 @@ if (isset($_POST['add_to_cart'])) {
                 <div class="mb-3">
                     <label class="form-label">เลือกแป้งพิซซ่า: </label>
                     <?php
-                    $sql = "SELECT DISTINCT pizzadough.pizdough_id ,pizzadough.dough_name FROM pizzadough JOIN detail ON detail.pd_id = pizzadough.pizdough_id WHERE detail.pizza_id = $id";
+                    $sql = "SELECT DISTINCT pizzadough.pizdough_id ,pizzadough.dough_name FROM pizzadough JOIN detail ON detail.pd_id = pizzadough.pizdough_id WHERE detail.pizza_id = $pid";
                     $result = $db_connection->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -153,7 +153,7 @@ if (isset($_POST['add_to_cart'])) {
                     <label for="quantity" class="form-label">จำนวนถาด</label>
                     <input type="number" id="quantity" name="quantity" class="form-control w-50" value="1" required>
                 </div>
-                <?php if (!isset($_SESSION['login_id'])) { ?>
+                <?php if (!isset($_SESSION['gg_id'])) { ?>
                     <a type="button" class="btn btn-outline-warning" href="Login.php">Sign in</a>
                 <?php } else { ?>
                     <!-- Add to Cart Button -->

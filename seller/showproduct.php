@@ -13,15 +13,23 @@ JOIN detail ON detail.pizza_id = pizza.piza_id
 JOIN size ON detail.sid = size.size_id 
 JOIN pizzadough ON detail.pd_id = pizzadough.pizdough_id 
 WHERE pizza.piza_id = detail.pizza_id";
-$result = $conn->query($sql);
+$result = $db_connection->query($sql);
 ?>
 
 
 
-<div class="container pt-5 mt-5">
+<div class="container text-center pt-5 mt-5">
     <div class="card">
-        <div class="col-sm-12 p-2 ms-auto">
-            <a href="addProduct.php" class="btn btn-primary">เพิ่มรายการใหม่</a>
+        <div class="row row-cols-lg-4 mt-2">
+            <div class="ms-2 col">
+                <a href="addProduct.php" class="btn btn-primary">เพิ่มรายการใหม่</a>
+            </div>
+            <div class="col">
+                <a href="showsize.php" class="btn btn-primary">ขนาดของพิซซ่า</a>
+            </div>
+            <div class="col">
+                <a href="showcrust.php" class="btn btn-primary">ประเภทแป้ง</a>
+            </div>
         </div>
         <div class="card-body">
             <table id="example" class="table table-striped" style="width:100%">
@@ -59,14 +67,20 @@ $result = $conn->query($sql);
                                     <?= $row['details']; ?>
                                 </td>
                                 <td>
-                                <?= $row['size_name']; ?>
+                                    <?= $row['size_name']; ?>
                                 </td>
                                 <td>
-                                <?= $row['dough_name']; ?>
+                                    <?= $row['dough_name']; ?>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger">ลบ</button>
-                                    <a href="editproduct.php?id=<?= $row['piza_id'] ?>" class="btn btn-warning">แก้ไข</a>
+                                    <form action="delete_item.php" method="post">
+                                        <input type="hidden" name="s_id" value="<?= $row['sid'] ?>">
+                                        <input type="hidden" name="c_id" value="<?= $row['pd_id'] ?>">
+                                        <input type="hidden" name="pizid" value="<?= $row['pizza_id'] ?>">
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="alert('You clicked OK. Proceeding...')" name="delete_item">ลบ</button>
+                                    </form>
+                                    <!-- <a href="editproduct.php?id" class="btn btn-warning">แก้ไข</a> -->
                                 </td>
                             </tr>
                             <?php
@@ -74,7 +88,7 @@ $result = $conn->query($sql);
                         }
                     } else { ?>
                         <tr>
-                            <td colspan="5">ไม่มีรายการพิซซ่า</td>
+                            <td colspan="8">ไม่มีรายการพิซซ่า</td>
                         </tr>
                     <?php } ?>
                 </tbody>

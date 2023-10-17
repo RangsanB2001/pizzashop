@@ -16,9 +16,7 @@ if (isset($_POST['update_order'])) {
     }
 }
 
-
-$uid = $_SESSION['login_id'];
-$stmt = $db_connection->prepare("SELECT * FROM `order` WHERE order.user_id = $uid");
+$stmt = $db_connection->prepare("SELECT * FROM `order` WHERE order.user_id = '$id'");
 $stmt->execute();
 $result = $stmt->get_result();
 $orderCount;

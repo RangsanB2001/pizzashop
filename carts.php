@@ -2,9 +2,9 @@
 ob_start();
 require 'haeder.php';
 
-if (isset($_SESSION['login_id'])) {
-    $user_id = $_SESSION['login_id'];
-    $sql = "SELECT * FROM cart JOIN pizza ON cart.piz_id = pizza.piza_id WHERE cart.user_id = $user_id";
+if (isset($_SESSION['gg_id'])) {
+    $user_id = $_SESSION['gg_id'];
+    $sql = "SELECT * FROM cart JOIN pizza ON cart.piz_id = pizza.piza_id WHERE cart.user_id = '$user_id'";
     $result = $db_connection->query($sql);
 
     // ตรวจสอบว่ามีข้อมูลสินค้าหรือไม่
@@ -123,11 +123,11 @@ if (isset($_SESSION['login_id'])) {
 
 if (isset($_POST['checkout'])) {
     $total = $_POST['total'];
-    $user_id = $_SESSION['login_id'];
+    $user_id = $_SESSION['gg_id'];
     $status_order = 'ยังไม่ชำระเงิน';
     $orderref = substr(md5(rand() . time()), 0, 8);
 
-    $sql = "INSERT INTO `order` (user_id,total_price,status_order, orderref) VALUES ($user_id,$total,'$status_order', '$orderref')";
+    $sql = "INSERT INTO `order` (user_id,total_price,status_order, orderref) VALUES ('$user_id',$total,'$status_order', '$orderref')";
 
     if ($db_connection->query($sql) === TRUE) {
         $order_id = $db_connection->insert_id;
@@ -153,7 +153,7 @@ if (isset($_POST['checkout'])) {
         }
 
         $stmt = $db_connection->prepare("DELETE FROM cart WHERE user_id = ?");
-        $stmt->bind_param("i", $user_id);
+        $stmt->bind_param("s", $user_id);
 
         if ($stmt->execute()) {
             echo "<script>

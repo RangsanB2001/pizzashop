@@ -1,6 +1,6 @@
 <?php
 // session_start();
-require 'config.php';
+require '../confing.php';
 
 if (
   $_SERVER['REQUEST_METHOD'] === 'POST' &&
@@ -38,38 +38,38 @@ if (
       if (move_uploaded_file($image_tmp, $upload_directory . $new_image_name)) {
 
         $sql = "INSERT INTO pizza (`piz_image`, `piz_name`, details) VALUES ('$new_image_name','$name','$details')";
-        if ($conn->query($sql) === true) {
-          $piz_id = $conn->insert_id;
+        if ($db_connection->query($sql) === true) {
+          $piz_id = $db_connection->insert_id;
           $sql = "INSERT INTO `detail`(`pizza_id`, `sid`, `pd_id`, `price`) VALUES ($piz_id,$size,$doung,$price)";
-          if ($conn->query($sql) === true) {
+          if ($db_connection->query($sql) === true) {
             echo "<script>
             alert('เพิ่มเมนูเรียบร้อย'); // Change the message
-            window.location.href = 'showproduct.php';
+            window.location.href = '$base_urls/showproduct.php';
           </script>";
           }
           ;
         } else {
           echo "<script>
           alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล'); // Change the message
-          window.location.href = 'addProduct.php';
+          window.location.href = '$base_urls/addProduct.php';
         </script>";
         }
       } else {
         echo "<script>
                 alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพ'); // Change the message
-                window.location.href = 'addProduct.php';
+                window.location.href = '$base_urls/addProduct.php';
               </script>";
       }
     } else {
       echo "<script>
             alert('ไฟล์ที่อัปโหลดไม่ใช่รูปภาพที่ถูกต้อง'); // Change the message
-            window.location.href = 'addProduct.php';
+            window.location.href = '$base_urls/addProduct.php';
           </script>";
     }
   } else {
     echo "<script>
         alert('นามสกุลของรูปภาพไม่ถูกต้อง'); // Change the message
-        window.location.href = 'addProduct.php';
+        window.location.href = '$base_urls/addProduct.php';
       </script>";
   }
 }

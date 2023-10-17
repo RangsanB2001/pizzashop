@@ -6,7 +6,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM pizza WHERE piza_id = ?");
+    $stmt = $db_connection->prepare("SELECT * FROM pizza WHERE piza_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -31,11 +31,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             </div>
         </div>
     </div>
-    <form action="editproduct.php" method="post" enctype="multipart/form-data">
+    <form action="updateProduct.php" method="post" enctype="multipart/form-data">
         <div class="row g-3 mb-2">
             <div class="col-sm-12">
                 <label for="form-label">รูปภาพพิซซ่า</label>
-                <input type="file" class="form-control" name="image" accept="image/png, image/jpg,image/jpeg" required>
+                <input type="file" class="form-control" name="image" accept="image/png, image/jpg,image/jpeg">
             </div>
             <div class="col-sm-12">
                 <label for="form-label">ชื่อหน้าพิซซ่า</label>
@@ -53,7 +53,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <label for="form-label">กำหนดไซต์</label>
                 <?php
                 $sql = "SELECT * FROM size";
-                $size = $conn->query($sql);
+                $size = $db_connection->query($sql);
                 ?>
                 <select id="pizza-size" name="pizza-size" class="form-select" required>
                     <?php if ($size->num_rows > 0) {
@@ -72,7 +72,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <label for="form-label">กำหนดไซต์แป้ง</label>
                 <?php
                 $sql = "SELECT * FROM pizzadough";
-                $size = $conn->query($sql);
+                $size = $db_connection->query($sql);
                 ?>
                 <select id="pizzadoung" name="pizzadoung" class="form-select" required>
                     <?php if ($size->num_rows > 0) {

@@ -30,8 +30,8 @@ $result = $db_connection->query($sql);
     </div>
 </header>
 <!--Main Navigation-->
-<section class="container-fluid text-center mt-3 bg-warning">
-    <h1 class="text-white">List Menu</h1>
+<section class="container-fluid text-center mt-2 bg-warning">
+    <h3 class="text-white">รายการพิซซ่า</h3>
 </section>
 <div class="container text-center mt-3">
     <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2">

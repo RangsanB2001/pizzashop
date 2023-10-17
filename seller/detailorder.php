@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM `order` 
     JOIN user ON `order`.user_id = user.gg_id  
     WHERE `order`.order_id =  $or_id";
-    $result = $conn->query($sql);
+    $result = $db_connection->query($sql);
 }
 
 ?>
@@ -100,7 +100,7 @@ if (isset($_GET['id'])) {
                                 <tbody>
                                     <?php  
                                        $sql = "SELECT * FROM order_items WHERE order_items.order_id = ?";
-                                       $stmt = $conn->prepare($sql);
+                                       $stmt = $db_connection->prepare($sql);
                                        $stmt->bind_param("i", $ord_id);
                                        $stmt->execute();
                                        $result = $stmt->get_result();

@@ -1,32 +1,32 @@
 <?php
-require 'config.php';
+require '../confing.php';
 session_start(); // Start a session
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    
+
     // Hash the entered password for comparison with the stored password
     $hashedPassword = md5($password);
-    
+
     // SQL query to check the username and hashed password
     $sql = "SELECT * FROM `seller` WHERE `sel_username` = '$username' AND `sel_password` = '$hashedPassword'";
-    
-    $result = $conn->query($sql);
-    
+
+    $result = $db_connection->query($sql);
+
     if ($result && $result->num_rows == 1) {
         $row = $result->fetch_assoc(); // Fetch the seller's data
         $_SESSION["username"] = $row["sel_username"];
         $_SESSION["userid"] = $row["seller_id"];
         echo "<script>
         alert('เข้าสู่ระบบสำเร็จ'); // Change the message
-        window.location.href = 'index.php';
+        window.location.href = '$base_urls/index.php';
         </script>";
         exit();
     } else {
         echo "<script>
         alert('username หรือ รหัสผ่านไม่ถูกต้อง!!'); // Change the message
-        window.location.href = 'login.php';
+        window.location.href = '$base_urls/login.php';
       </script>";
     }
 }
@@ -41,11 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Roboto:ital@1&family=Sarabun:wght@100&display=swap"
+        rel="stylesheet">
     <title>เพิ่มรายการพิซซ่า</title>
 </head>
 

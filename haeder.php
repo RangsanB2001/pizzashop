@@ -1,6 +1,7 @@
 <?php
 ob_start();
 require 'confing.php';
+require_once('LineLogin.php');
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +24,9 @@ require 'confing.php';
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
     <link href="js/datatables.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Roboto:ital@1&family=Sarabun:wght@100&display=swap" rel="stylesheet">
     <title>PungKungPizza</title>
 
     <style>
@@ -70,17 +74,22 @@ require 'confing.php';
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar bg-dark navbar-expand bg-body-tertiary " data-bs-theme="dark" style="z-index: 2000;">
+    <nav class="navbar bg-danger navbar-expand bg-body-danger text-warning" data-bs-theme="dark" style="z-index: 2000;">
         <div class="container hstack gap-3">
             <!-- Navbar brand -->
             <a class="navbar-brand fs-3 fw-700 text-warning fw-bold" href="<?= $base_url ?>/index.php">PangKungPizza</a>
-            <?php if (isset($_SESSION['login_id'])) {
-                $id = $_SESSION['login_id'];
+            <?php if (isset($_SESSION['profile']) && isset($_SESSION['pro']) || isset($_SESSION['login_id'])) {
+
+                if (isset($_SESSION['profile']) && isset($_SESSION['pro'])) {
+                    $pro = $_SESSION['profile'];
+                    $id = $pro->userId;
+                } else {
+                    $id = $_SESSION['login_id'];
+                }
                 $get_user = mysqli_query($db_connection, "SELECT * FROM `user` WHERE `gg_id`='$id'");
                 if (mysqli_num_rows($get_user) > 0) {
                     $user = mysqli_fetch_assoc($get_user);
                     $_SESSION['gg_id'] = $user['gg_id'];
-                    $id = $_SESSION['login_id'];
                 } else {
                     header('Location: logout.php');
                     exit;

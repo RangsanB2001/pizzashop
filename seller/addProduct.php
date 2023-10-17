@@ -28,7 +28,7 @@
                         <label for="form-label">กำหนดไซต์</label>
                         <?php
                         $sql = "SELECT * FROM size";
-                        $size = $conn->query($sql);
+                        $size = $db_connection->query($sql);
                         ?>
                         <select id="pizza-size" name="pizza-size" class="form-select" required>
                             <?php if ($size->num_rows > 0) {
@@ -47,7 +47,7 @@
                         <label for="form-label">กำหนดไซต์แป้ง</label>
                         <?php
                         $sql = "SELECT * FROM pizzadough";
-                        $size = $conn->query($sql);
+                        $size = $db_connection->query($sql);
                         ?>
                         <select id="pizzadoung" name="pizzadoung" class="form-select" required>
                             <?php if ($size->num_rows > 0) {

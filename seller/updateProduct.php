@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Execute the SQL query
-    if ($conn->query($sql)) {
+    if ($db_connection->query($sql)) {
         // Redirect to a success page if the update was successful
         header('Location: showproduct.php');
         exit();

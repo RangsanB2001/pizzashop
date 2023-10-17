@@ -2,12 +2,12 @@
 require 'haeder.php'; ?>
 
 <?php
-if (isset($_SESSION['login_id'])) {
-    $user_id = $_SESSION['login_id'];
+if (isset($_SESSION['gg_id'])) {
+    $user_id = $_SESSION['gg_id'];
     $sql = "SELECT DISTINCT `order`.*, user.fullname, user.address, user.email, user.phone 
     FROM `order` JOIN `order_items` ON `order`.`order_id` = `order_items`.`order_id` 
     JOIN `user` ON `order`.`user_id` = `user`.`gg_id` 
-    WHERE `order`.`status_order` = 'ยังไม่ชำระเงิน' AND `order`.`user_id` = $user_id";
+    WHERE `order`.`status_order` = 'ยังไม่ชำระเงิน' AND `order`.`user_id` = '$user_id'";
     $result = $db_connection->query($sql);
 }
 ?>
