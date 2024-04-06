@@ -52,7 +52,8 @@ require 'header.php';
                         </div>
                         <div class="col-sm-10">
                             <?php
-                            $sql = "SELECT SUM(total_price) as total FROM `order`";
+                            $sql = "SELECT SUM(total_price) as total FROM `order` 
+                            WHERE status_order ='ชำระเงินแล้ว'";
                             $result = $db_connection->query($sql);
                             if ($result->num_rows > 0) {
                                 $row = $result->fetch_assoc();
@@ -60,7 +61,7 @@ require 'header.php';
                                 ?>
                             <p class="text-primary h6">ยอดเงินรวม</p>
                             <p class="text-white">
-                                <?= $totalOrderPrice ?> บาท
+                               <?= $totalOrderPrice != 0 ? $totalOrderPrice . ' บาท' : '0 บาท' ?>
                             </p>
                             <?php } else { ?>
                             <p class="text-white h3">ไม่มีออเดอร์</p>

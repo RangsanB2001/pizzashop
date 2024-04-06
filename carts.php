@@ -2,9 +2,18 @@
 ob_start();
 require 'haeder.php';
 
+if (!isset($_SESSION['gg_id'])){
+    header("Location: $base_url/index.php");
+    exit;
+}
+
 if (isset($_SESSION['gg_id'])) {
     $user_id = $_SESSION['gg_id'];
-    $sql = "SELECT * FROM cart JOIN pizza ON cart.piz_id = pizza.piza_id WHERE cart.user_id = '$user_id'";
+
+    $sql = "SELECT * FROM cart 
+            JOIN pizza ON cart.piz_id = pizza.piza_id 
+            WHERE cart.user_id = '$user_id'";
+
     $result = $db_connection->query($sql);
 
     // ตรวจสอบว่ามีข้อมูลสินค้าหรือไม่
