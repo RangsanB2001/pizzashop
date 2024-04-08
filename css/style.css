@@ -102,3 +102,7 @@ section {
   display: block;
   cursor: pointer;
 }
+
+.omise-checkout-button{
+  color: blue;
+}

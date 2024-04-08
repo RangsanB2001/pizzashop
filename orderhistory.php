@@ -56,7 +56,6 @@ $orderCount;
                                             </span>
                                         </p>
                                     </div>
-                                    <!-- ปุ่มกดยกเลิก -->
                                     <div class="col-md-4" style="margin-top: 20px; ">
                                         <div class="row">
                                             <div class="col">
@@ -74,6 +73,11 @@ $orderCount;
                                                     <button type="submit" class="btn btn-outline-warning">View</button>
                                                 </form>
                                             </div>
+                                            <?php if ($row['status_order'] === 'ยังไม่ชำระเงิน') {?>
+                                            <div class="col">
+                                               <a href="checkout.php" class="btn btn-outline-danger"><span style="font-size: 0.8rem;">ชำระเงิน</span></a>
+                                            </div>
+                                            <?php } ?>
                                         </div>
                                         </form>
                                     </div>

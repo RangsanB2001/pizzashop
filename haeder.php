@@ -31,7 +31,7 @@ require_once('LineLogin.php');
 
     <style>
         /* CSS Styles for the Cart Table */
-        .cart-table {
+        /* .cart-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
@@ -55,20 +55,19 @@ require_once('LineLogin.php');
         .cart-table img {
             max-width: 100px;
             height: auto;
-        }
+        } */
 
         /* กำหนดสีพื้นหลัง */
-        .omise-button {
+        /* .omise-button {
             background-color: blueviolet;
             color: #FFFFFF;
-        }
+        } */
 
         /* กำหนดขนาดของปุ่ม */
-        .omise-button {
+        /* .omise-button {
             width: 300px;
             height: 40px;
-            /* ความสูงที่คุณต้องการ */
-        }
+        }*/
     </style>
 </head>
 

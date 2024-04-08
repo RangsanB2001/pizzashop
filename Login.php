@@ -6,10 +6,11 @@ $client = new Google_Client();
 $client->setClientId($clientID);
 $client->setClientSecret($clientSecret);
 
-$client->setRedirectUri('http://localhost/ใส่ชื่อเว็ป/Login.php');
+$client->setRedirectUri('http://localhost/PizzaShop/Login.php');
 
 $client->addScope("email");
 $client->addScope("profile");
+
 if (isset($_GET['code'])):
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     if (!isset($token["error"])) {
@@ -17,7 +18,7 @@ if (isset($_GET['code'])):
         // getting profile information
         $google_oauth = new Google_Service_Oauth2($client);
         $google_account_info = $google_oauth->userinfo->get();
-
+        // print_r($google_account_info);
         // Storing data into database
         $id = mysqli_real_escape_string($db_connection, $google_account_info->id);
         $full_name = mysqli_real_escape_string($db_connection, trim($google_account_info->name));
@@ -28,7 +29,7 @@ if (isset($_GET['code'])):
         if (mysqli_num_rows($get_user) > 0) {
             $_SESSION['login_id'] = $id;
             echo "<script>
-                alert('Login successful'); // Change the message
+                alert('Login successful');
                 window.location.href = 'index.php';
               </script>";
             exit;
@@ -38,7 +39,7 @@ if (isset($_GET['code'])):
             if ($insert) {
                 $_SESSION['login_id'] = $id;
                 echo "<script>
-                alert('Login successful'); // Change the message
+                alert('Login successful');
                 window.location.href = 'index.php';
               </script>";
                 exit;
@@ -49,8 +50,7 @@ if (isset($_GET['code'])):
               </script>";
             }
         }
-    }
-    ;
+    };
 else:
     ?>
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

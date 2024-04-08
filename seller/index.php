@@ -20,7 +20,10 @@ require 'header.php';
                             <div class="col-sm-10">
                                 <?php
                                 $today = date('Y-m-d');
-                                $sql = "SELECT COUNT(order_id) as total_order FROM `order` WHERE DATE(create_order) = '$today' AND status_order != 'ออเดอร์เรียบร้อย'";
+                                $sql = "SELECT COUNT(order_id) as total_order 
+                                FROM `order` 
+                                WHERE create_order BETWEEN '$today 00:00:00' AND '$today 23:59:59' 
+                                AND status_order NOT IN ('ยกเลิก');";
                                 $result = $db_connection->query($sql);
                                 if ($result->num_rows > 0) {
                                     $row = $result->fetch_assoc();
@@ -52,8 +55,12 @@ require 'header.php';
                         </div>
                         <div class="col-sm-10">
                             <?php
-                            $sql = "SELECT SUM(total_price) as total FROM `order` 
-                            WHERE status_order ='ชำระเงินแล้ว'";
+                            $today = date('Y-m-d');
+                            $sql = "SELECT SUM(total_price) as total 
+                            FROM `order` 
+                            WHERE create_order BETWEEN '$today 00:00:00' AND '$today 23:59:59' 
+                            AND status_order = 'ออเดอร์เรียบร้อย';";
+
                             $result = $db_connection->query($sql);
                             if ($result->num_rows > 0) {
                                 $row = $result->fetch_assoc();
@@ -63,8 +70,6 @@ require 'header.php';
                             <p class="text-white">
                                <?= $totalOrderPrice != 0 ? $totalOrderPrice . ' บาท' : '0 บาท' ?>
                             </p>
-                            <?php } else { ?>
-                            <p class="text-white h3">ไม่มีออเดอร์</p>
                             <?php } ?>
                         </div>
                     </div>
@@ -87,7 +92,7 @@ require 'header.php';
                             </div>
                             <div class="col-sm-8">
                                 <?php
-                                $today = date('Y-m-d');
+                                // $today = date('Y-m-d');
                                 $sql = "SELECT COUNT(piza_id) as total FROM `pizza`";
                                 $result = $db_connection->query($sql);
                                 if ($result->num_rows > 0) {
@@ -123,7 +128,6 @@ require 'header.php';
                             </div>
                             <div class="col-sm-8">
                                 <?php
-                                $today = date('Y-m-d');
                                 $sql = "SELECT COUNT(size_id) as total FROM `size`";
                                 $result = $db_connection->query($sql);
                                 if ($result->num_rows > 0) {
@@ -157,7 +161,6 @@ require 'header.php';
                             </div>
                             <div class="col-sm-8">
                                 <?php
-                                $today = date('Y-m-d');
                                 $sql = "SELECT COUNT(pizdough_id) as total FROM `pizzadough`";
                                 $result = $db_connection->query($sql);
                                 if ($result->num_rows > 0) {
@@ -187,7 +190,12 @@ require 'header.php';
     </div>
 </div>
 <?php
-$sql = "SELECT DATE(create_order) AS sales_date, SUM(total_price) AS daily_sales FROM `order` GROUP BY DATE(create_order) ORDER BY DATE(create_order)";
+$sql = "SELECT DATE(create_order) AS sales_date, SUM(total_price) AS daily_sales 
+FROM `order`
+WHERE status_order = 'ออเดอร์เรียบร้อย' 
+GROUP BY DATE(create_order) 
+ORDER BY DATE(create_order);
+";
 
 $result = $db_connection->query($sql);
 

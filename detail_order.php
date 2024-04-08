@@ -107,6 +107,12 @@ if (isset($_GET['oid'])) {
                                                     <?= $status ?>
                                                 <?php } ?>
                                             </span>
+
+                                            <?php if ($status === 'ยังไม่ชำระเงิน') { ?>
+                                                <span class="badge bg-warning text-black fw-bold">
+                                                    <?= $status ?>
+                                                <?php } ?>
+                                            </span>
                                     </li>
                                 </ul>
                             </div>
@@ -165,7 +171,7 @@ if (isset($_GET['oid'])) {
                         </div>
                         <div class="row">
                             <div class="col-xl-8">
-                            </div>
+                            </div>                                                
                             <div class="col-xl-3">
                                 <p class="h4 text-black float-start"><span class="text-black me-3"> Total Amount</span><span
                                         style="font-size: 25px;">

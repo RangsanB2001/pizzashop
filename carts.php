@@ -266,7 +266,7 @@ if (isset($_POST['checkout'])) {
                                         </tbody>
                                     </table>
                                 <?php else: ?>
-                                    <p>ไม่มีสินค้าในตะกร้า</p>
+                                    <p class="h4 text-center text-warning mt-3">ไม่มีสินค้าในตะกร้า</p>
                                 <?php endif; ?>
 
                                 <!-- แสดงราคารวมในตะกร้า -->
@@ -281,7 +281,9 @@ if (isset($_POST['checkout'])) {
                                     <input type="hidden" name="total" id="" value="<?= $total ?>">
                                     <?= $total; ?> บาท
                                 </h3>
+                                <?php if ($total > 0) { ?>
                                 <button type="submit" name="checkout" class="btn btn-primary">ยืนยันสั้งซื้อ</button>
+                                <?php } ?>
                             </form>
                         </div>
                     </div>
