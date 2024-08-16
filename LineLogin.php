@@ -2,7 +2,7 @@
 class LineLogin
 {
     #### change your id
-    private const CLIENT_ID = '2000822221';
+    private const CLIENT_ID = '';
     private const CLIENT_SECRET = '';
     private const REDIRECT_URL = 'http://localhost/PizzaShop/callback.php';
 
