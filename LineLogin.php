@@ -3,7 +3,7 @@ class LineLogin
 {
     #### change your id
     private const CLIENT_ID = '2000822221';
-    private const CLIENT_SECRET = '5d1e08684fa1766de7864b5e210c8e51';
+    private const CLIENT_SECRET = '';
     private const REDIRECT_URL = 'http://localhost/PizzaShop/callback.php';
 
     private const AUTH_URL = 'https://access.line.me/oauth2/v2.1/authorize';
